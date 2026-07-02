@@ -1,0 +1,125 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    box-sizing: border-box;
+}
+
+.container{
+    display: flex;
+    width: 100%;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #153677, #4e085f);
+    padding: 20px;
+}
+
+.todo-app{
+    width: 33%;
+    max-height: 500px;
+    background-color: #fff;
+    margin: 80px auto 20px;
+    padding: 40px 30px 50px;
+    border-radius: 10px;
+    overflow-y: auto;
+    overflow-wrap: anywhere;
+}
+
+.todo-app h2{
+    display: flex;
+    align-items: center;
+    color: #153677;
+    margin-bottom: 10px;
+}
+
+.todo-app h2 img{
+    height: 24px;
+    margin-left: 10px;
+}
+
+.input-btn{
+    display: flex;
+    background: #edeef0;
+    border-radius: 20px;
+    padding-left: 10px;
+}
+
+#todo-input{
+    flex: 1;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 14px;
+    padding: 12px;
+    border-radius: 20px;
+}
+
+#add-btn{
+    flex: 0.5;
+    border: none;
+    border-radius: 20px;
+    background: #ff5945;
+    color: #fff;
+    cursor: pointer;
+}
+
+#todo-list{
+    width: 100%;
+    padding: 20px;
+    position: relative;
+}
+
+#todo-list li{
+    list-style: none;
+    padding: 10px;
+    font-size: 17px;
+    cursor: pointer;
+    position: relative;
+}
+
+#todo-list li button{
+    position: absolute;
+    left: 300px;
+    top: 10px;
+    border: none;
+    width: 30px;
+    height: 30px;
+    padding-bottom: 4px;
+    border-radius: 50%;
+}
+
+#todo-list li button:hover{
+    background-color: #cdcdcf;
+}
+
+#todo-list li::before{
+    content: '';
+    position: absolute;
+    height: 17px;
+    width: 17px;
+    background-image: url(/TODOList/images/unchecked.png);
+    background-size: cover;
+    background-position: center;
+    top: 15px;
+    left: -13px;
+}
+
+/* Visite this website to learn about more pseudo elements https://www.w3schools.com/cssref/css_ref_pseudo_elements.php */
+
+#todo-list li.checked{
+    color: #555;
+    text-decoration: line-through;
+}
+
+
+#todo-list li.checked::before{
+    background-image: url(/TODOList/images/checked.png);
+}
+
+/* .clearAll{
+    padding: 7px;
+    border-radius: 10px;
+    border: none;
+    background: linear-gradient(135deg, #153677, #4e085f);
+    color: #fff;
+    margin-left: 10px;
+} */
