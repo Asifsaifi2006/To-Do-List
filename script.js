@@ -3,54 +3,84 @@ let addBtn = document.querySelector('#add-btn');
 let list = document.querySelector('#todo-list');
 let p = document.querySelector('.error');
 
-function addTask(){
-    let li = document.createElement('li');
-    let val = input.value;
 
-    let del = document.createElement('button');
-    del.innerText = 'x';
+let tasks = [];
+function addTask(){ 
+    let val = input.value;
 
     if(val.trim() == ""){
         p.innerText = "Empty task not allowed!";
     }else{
-        li.innerText = val;
-        list.appendChild(li);
-        li.appendChild(del);
+        const obj = {
+            id: Date.now(),
+            text: val,
+            completed: false
+        }
+
+        tasks.push(obj);
+        saveTasks();
+        console.log(tasks);
+
+        renderTask(obj);
+
         p.innerText = '';
-
-        li.addEventListener('click', ()=>{
-            li.classList.toggle('checked')
-            // saveData();
-        });
+        input.value = '';
     }
-    input.value = '';
-    
-    del.addEventListener('click', ()=>{
-        list.removeChild(li);
-        // saveData();
-    }); 
-
-    // saveData();
 }
+
+function deleteTask(li, id){
+    list.removeChild(li);
+    tasks = tasks.filter(task => task.id !== id)
+    saveTasks();
+}
+
+function renderTask(task) {
+    let li = document.createElement('li');
+    li.innerText = task.text;
+
+    if (task.completed) {
+        li.classList.add('checked');
+    }
+
+    let del = document.createElement('button');
+    del.innerText = 'x';
+
+    li.appendChild(del);
+    list.appendChild(li);
+
+    li.addEventListener('click', () => {
+        li.classList.toggle('checked');
+        task.completed = !task.completed;
+        console.log(task);
+        console.log(tasks);
+        saveTasks();
+    });
+
+    del.addEventListener('click', (e) => {
+        e.stopPropagation();
+        deleteTask(li, task.id);
+        console.log(tasks);
+    });
+}
+
+function saveTasks(){
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+}
+
+function getData(){
+    const storedTasks = localStorage.getItem('tasks');
+    
+    if(storedTasks){
+        tasks = JSON.parse(storedTasks);
+        console.log(tasks);
+        tasks.forEach(task => renderTask(task));
+    }
+}
+
+getData();
 
 addBtn.addEventListener('click', addTask);
 input.addEventListener('keydown', (event)=>{
     if(event.key == 'Enter') addTask();
 });
- 
-// function saveData(){
-//     localStorage.setItem('data', list.innerHTML)
-// }
 
-// function showData(){
-//     list.innerHTML = localStorage.getItem('data');
-// }
-
-// showData();
-
-// let clearBtn = document.querySelector('.clearAll');
-
-// clearBtn.addEventListener('click', ()=>{
-//     list.innerHTML = '';
-//     localStorage.removeItem('data');
-// })

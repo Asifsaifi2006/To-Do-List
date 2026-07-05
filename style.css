@@ -96,7 +96,7 @@
     position: absolute;
     height: 17px;
     width: 17px;
-    background-image: url(/TODOList/images/unchecked.png);
+    background-image: url(images/unchecked.png);
     background-size: cover;
     background-position: center;
     top: 15px;
@@ -112,14 +112,5 @@
 
 
 #todo-list li.checked::before{
-    background-image: url(/TODOList/images/checked.png);
+    background-image: url(images/checked.png);
 }
-
-/* .clearAll{
-    padding: 7px;
-    border-radius: 10px;
-    border: none;
-    background: linear-gradient(135deg, #153677, #4e085f);
-    color: #fff;
-    margin-left: 10px;
-} */
