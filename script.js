@@ -36,7 +36,11 @@ function deleteTask(li, id){
 
 function renderTask(task) {
     let li = document.createElement('li');
-    li.innerText = task.text;
+
+    let textSpan = document.createElement('span');
+    textSpan.className = 'task-text';
+    textSpan.innerText = task.text;
+    li.appendChild(textSpan);
 
     if (task.completed) {
         li.classList.add('checked');

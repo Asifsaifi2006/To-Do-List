@@ -7,18 +7,21 @@
 
 .container{
     display: flex;
+    justify-content: center;
+    align-items: flex-start;
     width: 100%;
     min-height: 100vh;
     background: linear-gradient(135deg, #153677, #4e085f);
-    padding: 20px;
+    padding: clamp(12px, 3vw, 24px);
 }
 
 .todo-app{
-    width: 33%;
-    max-height: 500px;
+    width: 100%;
+    max-width: 540px;
+    max-height: min(85vh, 600px);
     background-color: #fff;
-    margin: 80px auto 20px;
-    padding: 40px 30px 50px;
+    margin: clamp(24px, 8vh, 80px) auto clamp(16px, 4vh, 24px);
+    padding: clamp(20px, 5vw, 40px) clamp(16px, 4vw, 30px) clamp(30px, 6vw, 50px);
     border-radius: 10px;
     overflow-y: auto;
     overflow-wrap: anywhere;
@@ -27,64 +30,83 @@
 .todo-app h2{
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
     color: #153677;
     margin-bottom: 10px;
+    font-size: clamp(1.25rem, 4vw, 1.75rem);
 }
 
 .todo-app h2 img{
-    height: 24px;
-    margin-left: 10px;
+    height: clamp(20px, 5vw, 24px);
+    margin-left: 4px;
 }
 
 .input-btn{
     display: flex;
+    align-items: stretch;
     background: #edeef0;
     border-radius: 20px;
     padding-left: 10px;
+    min-height: 44px;
 }
 
 #todo-input{
     flex: 1;
+    min-width: 0;
     border: none;
     outline: none;
     background: transparent;
-    font-size: 14px;
+    font-size: clamp(14px, 3.5vw, 16px);
     padding: 12px;
     border-radius: 20px;
 }
 
 #add-btn{
-    flex: 0.5;
+    flex: 0 0 auto;
+    min-width: 72px;
     border: none;
     border-radius: 20px;
     background: #ff5945;
     color: #fff;
     cursor: pointer;
+    font-size: clamp(14px, 3.5vw, 16px);
+    padding: 0 16px;
+}
+
+#add-btn:hover{
+    background: #e04a38;
 }
 
 #todo-list{
     width: 100%;
-    padding: 20px;
+    padding: clamp(12px, 3vw, 20px) 0 0;
     position: relative;
 }
 
 #todo-list li{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
     list-style: none;
-    padding: 10px;
-    font-size: 17px;
+    padding: 12px 8px 12px 28px;
+    font-size: clamp(15px, 3.8vw, 17px);
     cursor: pointer;
     position: relative;
+    line-height: 1.4;
 }
 
 #todo-list li button{
-    position: absolute;
-    left: 300px;
-    top: 10px;
+    flex-shrink: 0;
     border: none;
-    width: 30px;
-    height: 30px;
-    padding-bottom: 4px;
+    width: 32px;
+    height: 32px;
+    padding-bottom: 2px;
     border-radius: 50%;
+    cursor: pointer;
+    font-size: 14px;
+    background: transparent;
 }
 
 #todo-list li button:hover{
@@ -99,13 +121,14 @@
     background-image: url(images/unchecked.png);
     background-size: cover;
     background-position: center;
-    top: 15px;
-    left: -13px;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
 }
 
 /* Visite this website to learn about more pseudo elements https://www.w3schools.com/cssref/css_ref_pseudo_elements.php */
 
-#todo-list li.checked{
+#todo-list li.checked .task-text{
     color: #555;
     text-decoration: line-through;
 }
@@ -113,4 +136,49 @@
 
 #todo-list li.checked::before{
     background-image: url(images/checked.png);
+}
+
+.task-text{
+    flex: 1;
+    min-width: 0;
+    word-break: break-word;
+}
+
+.error-text .error{
+    font-size: clamp(13px, 3.2vw, 14px);
+    margin-top: 8px;
+}
+
+/* Tablets and small laptops */
+@media (min-width: 600px){
+    #add-btn{
+        min-width: 88px;
+    }
+}
+
+/* Desktops and large screens */
+@media (min-width: 1024px){
+    .todo-app{
+        max-width: 540px;
+    }
+}
+
+/* Very small phones */
+@media (max-width: 360px){
+    .input-btn{
+        flex-direction: column;
+        padding: 8px;
+        border-radius: 16px;
+        gap: 8px;
+    }
+
+    #todo-input,
+    #add-btn{
+        width: 100%;
+        border-radius: 12px;
+    }
+
+    #add-btn{
+        min-height: 44px;
+    }
 }
